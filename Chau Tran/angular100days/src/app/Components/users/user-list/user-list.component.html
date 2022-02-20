@@ -1,0 +1,2 @@
+<user-detail *ngFor="let user of users" [user]="user" (selected)="onSelected($event)" (delete)="onDelete($event)"></user-detail>
+<div>Current selected user: {{ currentUser?.firstName }} {{ currentUser?.lastName }}</div>

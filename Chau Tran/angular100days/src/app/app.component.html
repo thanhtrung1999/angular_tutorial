@@ -1,0 +1,156 @@
+<h1>Start project</h1>
+<p>{{ user.name }}</p>
+<p>{{ user.age }}</p>
+
+<input type="text" [value]="user.name">
+<br>
+<button type="button" (click)="handler($event)">Click me</button>
+<p>{{ name }}</p>
+<input type="text" [(ngModel)]="name" (ngModelChange)="handler($event)">
+<br>
+<h1 *ngIf="user.age >= 18;else under18">Hello, {{ user.name }}</h1>
+<ng-template #under18>
+    <p>You are to young to see this content</p>
+</ng-template>
+<button (click)="user.age = user.age - 1">-</button>
+<span>Age: {{ user.age }}</span>
+<button (click)="user.age = user.age + 1">+</button>
+<br><br>
+<button (click)="isDanger = !isDanger">Toggle danger</button>
+<button (click)="isWarning = !isWarning">Toggle warning</button>
+
+<!--
+  - [class.ten-class]
+  - [class]="array"
+  - [class]="object"
+  - [class]="variable"
+-->
+
+<!-- <div class="box" [class.red-border]="isDanger" [class.green-background]="isWarning"></div> -->
+<div class="box" [class]="{'red-border': isDanger, 'green-background': isWarning}">Class binding</div>
+
+<!--
+  - [style.ten-style]
+  - [style.tenStyle]
+  - [style.tenStyle.unit]
+  - [style.object]
+  - [style.css-variable]
+-->
+
+<!-- <p [style.color]="isDanger ? 'red' : ''" [style.background-color]="isWarning ? '#f2de11' : ''" [style.font-size.rem]="2">Style binding</p> -->
+<p [style.--text-color]="isDanger ? 'red' : 'blue'" [style]="{ color: 'var(--text-color)', backgroundColor: 'yellow' }">Style binding</p>
+<br><br>
+
+<button (click)="currentProgress = currentProgress + 1">Increase progress</button>
+<br>
+<progress-bar></progress-bar>
+<br>
+<progress-bar [progress]="currentProgress" progress-color="blue"></progress-bar>
+<br><br>
+<user-list></user-list>
+<br><br>
+<!-- <toggle #toggleComp [(checked)]="isChecked"></toggle> -->
+
+<button (click)="showLast = !showLast">Toggle show last</button>
+
+<toggle [(checked)]="isChecked"></toggle>
+<toggle [(checked)]="isChecked"></toggle>
+<toggle [(checked)]="isChecked"></toggle>
+<ng-container *ngIf="showLast">
+  <toggle [(checked)]="isChecked"></toggle>
+</ng-container>
+<input #nameInput type="text" [(ngModel)]="name" (ngModelChange)="name = $event">
+<br><br>
+<toggle [(checked)]="questions.question1">
+  <h3 class="header">Header 1</h3>
+  <label>Label 1</label>
+  <p class="content">Content 1</p>
+</toggle>
+<toggle [(checked)]="questions.question2" [canSkip]="true">
+  <h3 class="header">Header 2</h3>
+  <ng-container ngProjectAs="label">
+    <span>Label 2</span>
+    <button>something</button>
+  </ng-container>
+  <p class="content">Content 2</p>
+  <button class="btn">Skip</button>
+</toggle>
+<br><br>
+
+<div class="card mx-4">
+	<div class="card-header">
+		You have selected <ng-container [ngTemplateOutlet]="counterTmpl"></ng-container>.
+	</div>
+	<div class="card-body">
+		There are <ng-container [ngTemplateOutlet]="counterTmpl"></ng-container> was selected.
+	</div>
+	<div class="card-footer">
+		You have selected <ng-container [ngTemplateOutlet]="counterTmpl"></ng-container>.
+	</div>
+</div>
+
+<ng-template #counterTmpl>
+	<span class="badge badge-danger">{{ counter }}</span> item(s)
+</ng-template>
+
+<app-tabs [navs]="navs" [linkTemplate]="template"></app-tabs>
+<ng-template #template let-l>
+  <h5>{{l}}</h5>
+</ng-template>
+<br><br>
+
+<!-- <app-tab-group [(activeIndex)]="currentTabIndex">
+  <app-tab-panel title="First tab"><h3>First tab content</h3></app-tab-panel>
+  <app-tab-panel title="Second tab"><h3>Second tab content</h3></app-tab-panel>
+  <app-tab-panel title="Third tab"><h3>Third tab content</h3></app-tab-panel>
+  <app-tab-panel title="Fourth tab"><h3>Fourth tab content</h3></app-tab-panel>
+</app-tab-group>
+<br> -->
+<button class="btn btn-primary" (click)="showTabPanel = !showTabPanel">Toggle tab 4</button>
+<app-bs-tab-group [(activeIndex)]="currentTabIndex">
+  <app-tab-panel title="Tab 1">
+    <ng-template tabContent>
+      <h3>First tab content</h3>
+      <app-counter></app-counter>
+    </ng-template>
+  </app-tab-panel>
+  <app-tab-panel title="Tab 2">
+    <ng-template tabContent>
+      <h3>Second tab content</h3>
+      <app-counter></app-counter>
+    </ng-template>
+  </app-tab-panel>
+  <app-tab-panel title="Tab 3">
+    <ng-template tabContent>
+      <h3>Third tab content</h3>
+      <app-counter></app-counter>
+    </ng-template>
+  </app-tab-panel>
+  <app-tab-panel title="Tab 4" *ngIf="showTabPanel">
+    <ng-template tabContent>
+      <h3>Fourth tab content</h3>
+      <app-counter></app-counter>
+    </ng-template>
+  </app-tab-panel>
+</app-bs-tab-group>
+<br><br>
+
+<p>{{ currentDate | date }}</p>
+<p>{{ currentDate | date: 'shortDate' }}</p>
+<p>{{ currentDate | date: 'mediumDate' }}</p>
+<p>{{ currentDate | date: 'fullDate' }}</p>
+<p>{{ currentDate | date: 'yyyy-MM-dd' }}</p>
+
+<p>{{ 'Thanh Trung' | lowercase }}</p>
+<p>{{ 'Thu Phuong' | uppercase }}</p>
+
+<p>{{ 250 | currency }}</p>
+<p>{{ 250000 | currency: 'VND' }}</p>
+
+<p>{{ 2.12434695234 | number: '1.1-6' }}</p>
+<p>{{ 0.57 | percent }}</p>
+
+<p>{{ user | json }}</p>
+<p>{{ _interval | async }}</p>
+
+<p>{{ addr | formatAddress }}</p>

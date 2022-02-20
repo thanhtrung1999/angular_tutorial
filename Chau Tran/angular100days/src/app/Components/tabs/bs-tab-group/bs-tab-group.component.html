@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs" role="tablist">
+	<li class="nav-item" role="presentation" *ngFor="let tab of tabPanelList; index as idx" (click)="activeIndexChange.emit(idx)">
+		<a class="nav-link" [class.active]="idx === activeIndex" role="tab" aria-selected="true">
+      <span>{{tab.title}}</span>
+      <button (click)="removeTab(tab)" class="btn btn-danger ml-4">x</button>
+    </a>
+	</li>
+
+</ul>
+
+<div class="tab-content">
+	<ng-container *ngFor="let tab of tabPanelList; index as idx">
+		<div class="tab-pane active" role="tabpanel" *ngIf="idx === activeIndex">
+			<ng-container *ngTemplateOutlet="tab.panelBody"></ng-container>
+		</div>
+	</ng-container>
+</div>

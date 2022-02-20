@@ -1,0 +1,20 @@
+<h1 appFontBold>Hello World!</h1>
+<h2>Chao ban, {{ name | uppercase }}. Ban dang {{ age }} tuoi</h2>
+<input type="text" [(ngModel)]="name" />
+<br>
+<!-- <p *ngIf="age < 18">Bạn quá trẻ</p>
+<p *ngIf="age >= 18">Bạn quá già</p> -->
+<p *ngIf="age < 18 then c1 else c2"></p>
+<ng-template #c1>Ban qua tre</ng-template>
+<ng-template #c2>Ban qua gia</ng-template>
+<br>
+<br>
+<button type="button" (click)="tangtuoi()">Tang tuoi</button>
+<br>
+<br>
+<p>Danh sach sinh vien</p>
+<ul>
+  <li *ngFor="let student of students">
+    {{ student }}
+  </li>
+</ul>
